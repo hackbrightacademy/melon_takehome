@@ -81,4 +81,7 @@ The application is deployed using Heroku.
 
 To deploy, run `git push heroku main` (you will need to set up Heroku access first).
 
+If you need to run a command on heroku, you will need to precede the command with `heroku run`.
+For example, to run the `model.py` file interactively, you would use `heroku run python3 -i model.py`.
+
 The deployed application can be found at https://melon-takehome.herokuapp.com/.

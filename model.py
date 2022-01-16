@@ -1,5 +1,6 @@
 import datetime
 import os
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 
@@ -80,3 +81,7 @@ def connect_to_db(flask_app):
     db.init_app(flask_app)
 
     print("Connected to the db!")
+
+if __name__ == "__main__":
+    app = Flask(__name__)
+    connect_to_db(app)
