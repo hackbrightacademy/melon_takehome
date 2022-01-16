@@ -1,8 +1,9 @@
-from model import connect_to_db, Reservation, db
+from model import Reservation, db
 from server import app
 import datetime
 
-connect_to_db(app)
+db.init_app(app)
+db.drop_all()
 db.create_all()
 
 # generate reservations for users 0 - 9 (user0, user1, user2 ... user9)
