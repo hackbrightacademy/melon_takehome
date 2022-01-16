@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request, flash, session, redirect, jsonify
-from sqlalchemy import func
-from datetime import datetime, timedelta
+from flask import Flask, render_template, request, session, redirect, jsonify
 from dateutil.parser import parse
-from model import db, connect_to_db, available_reservations, \
-    retrieve_reservations, create_reservation, delete_reservations
-import pytz
+from model import (
+    db,
+    connect_to_db,
+    available_reservations,
+    retrieve_reservations,
+    create_reservation,
+    delete_reservations,
+)
 import os
 
 app = Flask(__name__)
@@ -35,7 +38,7 @@ def get_user_reservations():
 
 @app.route("/schedule")
 def render_schedule():
-    """ View scheduling page."""
+    """View scheduling page."""
     return render_template("schedule.html")
 
 @app.route("/reservations/delete", methods=["POST"])
@@ -49,7 +52,7 @@ def delete_reservation():
 
 @app.route("/reservations/book", methods=["POST"])
 def make_reservation():
-    """ Create a reserviation with the specified user and time."""
+    """Create a reservation with the specified user and time."""
     reservation_start = parse(request.form.get("start_time"))
     username = session["username"]
 

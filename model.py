@@ -1,4 +1,5 @@
 import datetime
+import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 
@@ -33,13 +34,13 @@ def delete_reservations(reservation_start, username):
 def retrieve_reservations(username):
     return Reservation.query.filter_by(username=username).all()
 
-def create_reservation(username, reservation_start): 
+def create_reservation(username, reservation_start):
     new_reservaton = Reservation(username=username, start_time=reservation_start)
     db.session.add(new_reservaton)
     db.session.commit()
 
 def available_reservations(start_time, end_time, username):
-        # retrieve reservations in within the specified time range 
+        # retrieve reservations in within the specified time range
     all_reservations_in_range = (
         db.session.query(Reservation.start_time)\
         .filter(Reservation.start_time.between(start_time, end_time))\
@@ -54,9 +55,9 @@ def available_reservations(start_time, end_time, username):
         .all()
     user_reservation_dates = {res.start_time.date()for res in user_reservations}
 
-    # Initialize list for possible times 
+    # Initialize list for possible times
     times = []
-   
+
     # Possible reservations can only happen on the half hour
     first_reservation_time = start_time + (datetime.min - start_time) \
         % timedelta(minutes=30)
@@ -70,7 +71,8 @@ def available_reservations(start_time, end_time, username):
         current = current + timedelta(minutes=30)
     return times
 
-def connect_to_db(flask_app, db_uri="postgresql:///reservations"):
+def connect_to_db(flask_app):
+    db_uri = os.environ["DATABASE_URL"].replace("postgres", "postgresql")
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
