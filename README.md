@@ -3,6 +3,8 @@
 ## Description
 This project allows you to make and manage melon tasting reservations. 🍉
 
+[Project Requirements](https://docs.google.com/document/d/1g5WMLwezVuGCNnZBafREobcDDst8PgxElGPHfk7EgRI/edit)
+
 ## Justification
 I chose to use Flask because it is a lightweight web framework that is flexible and simple to implement. I used postgreSQL because it's a commonly used relational database and makes a good choice since every reservation has a consistent format. SQLAlchemy allowed me to incorporate these two technologies using Python. I used Jinja to programmatically generate HTML and AJAX to handle retrieving available reservations from the database so that the page does not need to reload after the user submits their query.     
 
